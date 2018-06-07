@@ -4,11 +4,17 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default class WriteScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Write',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerLeft: <Ionicons name="ios-camera"style={{ paddingLeft: 10 }}  size={32}  />,
+      title: 'Instagram',
+      headerRight: <Ionicons name="ios-send" style={{ paddingRight: 10 }} size={32}  />
+
+    };
   };
 
   render() {

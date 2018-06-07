@@ -8,11 +8,13 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
+import { Ionicons } from '@expo/vector-icons';
 
 class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Profile',
+      headerLeft: <Ionicons name="ios-camera"style={{ paddingLeft: 10 }}  size={32}  />,
+      title: 'Instagram',
       headerRight: (
         <Button
           onPress={async () => {

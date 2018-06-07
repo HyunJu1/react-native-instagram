@@ -58,6 +58,8 @@ const RootStack = createBottomTabNavigator(
   }
 );
 
+
+
 const AppNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
