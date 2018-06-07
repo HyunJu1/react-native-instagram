@@ -6,14 +6,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import AuthLoadingScreen from './screens/auth_loading';
-import HomeScreen from './screens/home';
-import HeartScreen from './screens/heart';
-import WriteScreen from './screens/write';
-import SearchScreen from './screens/search';
-import ProfileScreen from './screens/profile';
-import OtherScreen from './screens/other';
 import SignInScreen from './screens/signin';
 
+import HomeScreen from './tabnavigator/HomeTab';
+import HeartScreen from './tabnavigator/LikeTab';
+import WriteScreen from './tabnavigator/PlusTab';
+import SearchScreen from './tabnavigator/SearchTab';
+import ProfileScreen from './tabnavigator/ProfileTab';
 import { Theme } from './config';
 
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
