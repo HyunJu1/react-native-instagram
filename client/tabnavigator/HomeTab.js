@@ -7,7 +7,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchUsers } from '../actions';
+import { fetchPosts } from '../actions';
 import { Ionicons } from '@expo/vector-icons';
 
 class HomeScreen extends React.Component {
@@ -20,14 +20,16 @@ class HomeScreen extends React.Component {
     };
   };
   componentDidMount() {
-    this.props.fetchUsers();
+    this.props.fetchPosts();
   }
-  renderUsers() {
-    if (this.props.users) {
-      return this.props.users.map(user => {
+  renderPosts() {
+    if (this.props.posts) {
+      return this.props.posts.map(post => {
         return (
-          <View style={styles.card} key={user.id}>
-            <Text>{user.username}</Text>
+          <View style={styles.card} key={post.id}>
+            <Text>{post.title}</Text>
+            <Text>{post.content}</Text>
+            <Text>{post.name}</Text>
           </View>
         );
       });
@@ -37,7 +39,7 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.users}>
-          {this.renderUsers()}
+          {this.renderPosts()}
         </View>
       </View>
     );
@@ -54,9 +56,9 @@ class HomeScreen extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { users: state.users };
+  return { posts: state.posts };
 }
-export default connect(mapStateToProps, { fetchUsers })(HomeScreen);
+export default connect(mapStateToProps, { fetchPosts })(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {

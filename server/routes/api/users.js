@@ -1,5 +1,4 @@
 var express = require('express');
-var axios = require('axios');
 
 var db = require('../../models');
 const asyncError = require('../../utils/async-error');

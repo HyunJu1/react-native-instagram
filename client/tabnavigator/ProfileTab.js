@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons,  MaterialCommunityIcons } from '@expo/vector-icons';
 import { Container, Content, Icon, Header, Left, Body, Right,   Button,Segment } from 'native-base'
 import CardComponent from '../screens/CardComponent'
 var { height, width } = Dimensions.get('window');
@@ -29,15 +29,14 @@ class ProfileScreen extends React.Component {
     return {
       headerLeft: <Ionicons name="ios-camera"style={{ paddingLeft: 10 }}  size={32}  />,
       title: 'Instagram',
-      headerRight: (
-        <Button
-          onPress={async () => {
-            await AsyncStorage.clear();
-            navigation.navigate('Auth');
-          }} 
-          title="Signout"
-          color="red"
-        />)
+      headerRight: 
+      
+      
+      <MaterialCommunityIcons name="logout"style={{ paddingRight: 10 }}  size={28} 
+      onPress={async()=>{await AsyncStorage.clear(); navigation.navigate('Auth');}}
+      />
+      ,
+
       };
     };
 
@@ -47,7 +46,15 @@ class ProfileScreen extends React.Component {
       this.state = {
           activeIndex: 0
       }
-  }
+  }  
+  _showMoreApp = () => {
+    this.props.navigation.navigate('Other');
+  };
+
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
 
   segmentClicked(index) {
       this.setState({
@@ -80,7 +87,7 @@ renderSectionOne() {
               }}
                   source={image}>
               </Image>
-
+            {/* <Text>{this.state.username}</Text> */}
           </View>
       )
   })
@@ -93,7 +100,7 @@ renderSection() {
 
       return (
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-
+    
               {this.renderSectionOne()}
           </View>
       )
@@ -102,6 +109,7 @@ renderSection() {
   else if (this.state.activeIndex == 1) {
       return (
           <View>
+              
               <CardComponent imageSource="1" likes="101" />
               <CardComponent imageSource="2" likes="101" />
               <CardComponent imageSource="3" likes="101" />
@@ -236,14 +244,7 @@ renderSection() {
 );
 }
 
-  _showMoreApp = () => {
-    this.props.navigation.navigate('Other');
-  };
 
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
 }
 
 function mapStateToProps(state) {

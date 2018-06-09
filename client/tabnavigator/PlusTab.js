@@ -7,7 +7,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 
 
-export default class WriteScreen extends React.Component {
+export default class PlusTab extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerLeft: <Ionicons name="ios-camera"style={{ paddingLeft: 10 }}  size={32}  />,
@@ -16,15 +16,16 @@ export default class WriteScreen extends React.Component {
 
     };
   };
-
   render() {
     return (
       <View style={styles.container}>
-        <Text>Write Screen</Text>
+        <Text>Plus Screen</Text>
       </View>
     );
   }
-}
+
+}  
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
