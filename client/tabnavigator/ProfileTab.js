@@ -87,7 +87,7 @@ renderSectionOne() {
               }}
                   source={image}>
               </Image>
-            {/* <Text>{this.state.username}</Text> */}
+
           </View>
       )
   })
@@ -112,8 +112,8 @@ renderSection() {
               
               <CardComponent imageSource="1" likes="101" />
               <CardComponent imageSource="2" likes="101" />
-              <CardComponent imageSource="3" likes="101" />
-              <CardComponent imageSource="1" likes="101" />
+              <CardComponent imageSource="2" likes="101" />
+              <CardComponent imageSource="2" likes="101" />
               <CardComponent imageSource="2" likes="101" />
               <CardComponent imageSource="3" likes="101" />
           </View>

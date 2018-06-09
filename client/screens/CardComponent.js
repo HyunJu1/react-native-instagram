@@ -25,8 +25,8 @@ class CardComponent extends Component {
                     <Left>
                         <Thumbnail source={require('../assets/me2.png')} />
                         <Body>
-                            <Text>Varun </Text>
-                            <Text note>Jan 15, 2018</Text>
+                            <Text>{this.props.name} </Text>
+                            <Text note>{this.props.createdAt} </Text>
                         </Body>
                     </Left>
                 </CardItem>
@@ -36,13 +36,13 @@ class CardComponent extends Component {
                 <CardItem style={{ height: 45 }}>
                     <Left>
                         <Button transparent>
-                            <Icon name="ios-heart-outline" style={{ color: 'black' }} />
+                            <Icon name="ios-heart-outline" style={{ color: 'black' }} size={24} />
                         </Button>
                         <Button transparent>
-                            <Icon name="ios-chatbubbles-outline" style={{ color: 'black' }} />
+                            <Icon name="ios-chatbubbles-outline" style={{ color: 'black' }} size={24} />
                         </Button>
                         <Button transparent>
-                            <Icon name="ios-send-outline" style={{ color: 'black' }} />
+                            <Icon name="ios-send-outline" style={{ color: 'black' }} size={24} />
                         </Button>
 
 
@@ -55,8 +55,11 @@ class CardComponent extends Component {
                 <CardItem>
                     <Body>
                         <Text>
-                            <Text style={{ fontWeight: "900" }}>varun </Text>
-                            Ea do Lorem occaecat laborum do. Minim ullamco ipsum minim eiusmod dolore cupidatat magna exercitation amet proident qui. Est do irure magna dolor adipisicing do quis labore excepteur. Commodo veniam dolore cupidatat nulla consectetur do nostrud ea cupidatat ullamco labore. Consequat ullamco nulla ullamco minim.
+                            <Text style={{ fontWeight: "900" }}>{this.props.name}</Text>
+                            {this.props.title}
+                        </Text>
+                        <Text>                            
+                            {this.props.content}
                         </Text>
                     </Body>
                 </CardItem>
