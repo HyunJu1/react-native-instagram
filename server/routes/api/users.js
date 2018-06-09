@@ -21,12 +21,15 @@ module.exports = function(app) {
   }));
 
   router.use(app.oauth.authenticate());
-  router.use('/me', (req, res) => {
-    res.json(req.locals.user);
-  });
+  router.use('/me', asyncError(async(req, res) => {
+    res.json(await db.User.findById(req.res.locals.oauth.token.user.id));
+  }));
+
+  
   router.get('/', asyncError(async (req, res, next) => {
     const users = await db.User.findAll({});
     res.json(users);
   }));
   return router;
 };
+

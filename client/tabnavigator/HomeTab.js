@@ -21,7 +21,6 @@ class HomeScreen extends React.Component {
       headerLeft: <Ionicons name="ios-camera"style={{ paddingLeft: 10 }}  size={32}  />,
       title: 'Instagram',
       headerRight: <Ionicons name="ios-send" style={{ paddingRight: 10 }} size={32}  />
-
     };
   };
 
@@ -46,27 +45,14 @@ class HomeScreen extends React.Component {
       console.log(error)
     })
   }
-  // renderItem = ({ item }) => {
-  //   return (
-  //     <TouchableOpacity style={{position: 'relative', flexDirection: 'column', alignItems: 'center'}}>
-  //       <LinearGradient 
-  //         start={{x: 1.0, y: 0.0}}
-  //         end={{x: 1.0, y: 1.0 }}
-  //         colors={['#c32aa3', '#4c5fd7', '#7232bd', '#f46f30', '#ffdc7d']} style={styles.borderGradient}>
-  //       <Thumbnail style={styles.ThumbnailStories} 
-  //         source={{uri: item.user.profile_picture}}/>
-  //       </LinearGradient>
-  //       <Text>{item.user.username}</Text>
-  //     </TouchableOpacity>
-  //   )
-  // }
+
   renderPosts() {
     console.log(this.props.posts);
     if (this.props.posts) {
       return this.props.posts.map(post => {
         return (
           <View>
-            <CardComponent imageSource="1" likes="101" createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
+            <CardComponent imageSource='https://loremflickr.com/320/240?random=1' likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
           </View>
         );
       });
@@ -80,10 +66,7 @@ class HomeScreen extends React.Component {
       <Container style={styles.container}>
         <Content>
             <View style={{ paddingTop: 10 }}>
-              
-                {/* <CardComponent imageSource="1" likes="101"/>
-                <CardComponent imageSource="2" likes="101"/>
-                <CardComponent imageSource="3" likes="101"/> */}
+           
                 {this.renderPosts()}
              
             </View>

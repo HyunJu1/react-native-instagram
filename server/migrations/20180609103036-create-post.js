@@ -24,6 +24,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      image: {
+        allowNull: true,
+        type: Sequelize.DATE
+      },
+      likes: {
+        allowNull: true,
+        type: Sequelize.INTEGER
       }
     });
   },

@@ -18,7 +18,9 @@ class CardComponent extends Component {
             "2": require('../assets/feed_images/2.jpg'),
             "3": require('../assets/feed_images/3.png')
         }
-
+        const imageSource={
+            uri:this.props.imageSource
+        }
         return (
             <Card>
                 <CardItem>
@@ -31,18 +33,18 @@ class CardComponent extends Component {
                     </Left>
                 </CardItem>
                 <CardItem cardBody>
-                    <Image source={images[this.props.imageSource]} style={{ height: 200, width: null, flex: 1 }} />
+                    <Image source={imageSource} style={{ height: 200, width: null, flex: 1 }} />
                 </CardItem>
                 <CardItem style={{ height: 45 }}>
                     <Left>
                         <Button transparent>
-                            <Icon name="ios-heart-outline" style={{ color: 'black' }} size={24} />
+                            <Icon name="ios-heart-outline" style={{ color: 'black' }} size={30} />
                         </Button>
                         <Button transparent>
-                            <Icon name="ios-chatbubbles-outline" style={{ color: 'black' }} size={24} />
+                            <Icon name="ios-chatbubbles-outline" style={{ color: 'black' }} size={30} />
                         </Button>
                         <Button transparent>
-                            <Icon name="ios-send-outline" style={{ color: 'black' }} size={24} />
+                            <Icon name="ios-send-outline" style={{ color: 'black' }} size={30} />
                         </Button>
 
 

@@ -124,6 +124,7 @@ renderSection() {
     this.props.fetchUsers();
   }
   render() {
+      console.log(this.props.profile);
     return (
       <Container style={styles.container}>
 
@@ -192,9 +193,8 @@ renderSection() {
 
               <View style={{ paddingBottom: 10 }}>
                   <View style={{ paddingHorizontal: 10 }}>
-                      <Text style={{ fontWeight: 'bold' }}>Moon Hyun Ju</Text>
-                      <Text>종강 제발!!</Text>
-                      <Text>https://github.com/HyunJu1/react-native-instagram</Text>
+                      <Text style={{ fontWeight: 'bold' }}>{this.props.profile.username}</Text>
+                      <Text>가입날짜: {this.props.profile.createdAt} </Text>
                   </View>
               </View>
 
@@ -248,7 +248,7 @@ renderSection() {
 }
 
 function mapStateToProps(state) {
-  return { users: state.users };
+  return { profile: state.loginUser };
 }
 export default connect(mapStateToProps, { fetchUsers })(ProfileScreen);
 
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
 });

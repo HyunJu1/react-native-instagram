@@ -15,6 +15,14 @@ router.get('/', catchErrors(async (req, res) => {
   // }
 }));
 
+router.get('/myposts/:id', catchErrors(async (req, res) => {
+  const post = await User.findById(req.params.id);
+  res.json(posts);
+  // if (posts) {
+  //   res.status(200).send(posts);
+  // }
+}));
+
 router.get('/:id', catchErrors(async (req, res) => {
   const post = await Posts.findById(req.params.id);
   if (post) {
@@ -42,7 +50,9 @@ router.post('/', catchErrors(async (req, res) => {
   const post = await Posts.create({
     title: req.body.title,
     name: req.body.name,
-    content: req.body.content
+    content: req.body.content,
+    image:req.body.image,
+    likes:req.body.likes
   });
   res.status(201).send(post);
 }));

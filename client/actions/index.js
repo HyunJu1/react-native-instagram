@@ -3,7 +3,6 @@ import qs from 'qs';
 import { AsyncStorage } from 'react-native';
 import { Config } from '../config';
 import NavigationService from '../navigation_service';
-// export const FETCH_POSTS = 'fetch_posts';
 export const FETCH_POST = 'fetch_post';
 export const CREATE_POST = 'create_post';
 export const DELETE_POST = 'delete_post';
@@ -12,7 +11,7 @@ export const UPDATE_POST = 'update_post';
 export function signin(username, password) {
   return async dispatch => {
     try {
-      // 주의!: OAuth2Server는 x-www-form-urlencoded 만 받는다.
+      
       const response = await axios.post(`${Config.server}/api/oauth/token`,
         qs.stringify({
           username: username,
@@ -28,13 +27,15 @@ export function signin(username, password) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
       console.log(`Bearer ${response.data.access_token}`);
       await AsyncStorage.setItem('accessToken', response.data.access_token);
+
+      const loginUser = await axios.get(`${Config.server}/api/users/me`);
+      dispatch({type: 'FETCHED_LOGIN_USER', payload: loginUser.data});
       NavigationService.navigate('App');
-    } catch (err) {
+    } catch (err) {  
       console.log(err.response || err);
       alert('Invalid ID or Password');
-    }
-  };
-}
+    }  
+  };}  
 
 export function signout() {
   console.log("SIGNOUT!!");
@@ -45,6 +46,9 @@ export function signout() {
     NavigationService.navigate('Auth');
   };
 }
+
+
+
 
 export function fetchUsers() {
   return dispatch => {

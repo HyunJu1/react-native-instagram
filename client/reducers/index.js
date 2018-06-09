@@ -10,6 +10,14 @@ function users(state = [], action) {
       return state;
   }
 }
+function loginUser(state = [], action) {
+  switch (action.type) {
+    case 'FETCHED_LOGIN_USER':
+      return action.payload;
+    default:
+      return state;
+  }
+}
 function posts(state = [], action) {
   switch (action.type) {
     case 'FETCHED_POSTS':
@@ -25,7 +33,8 @@ function posts(state = [], action) {
 }
 const rootReducer = combineReducers({
   users,
-  posts
+  posts,
+  loginUser
 });
 
 export default rootReducer;
