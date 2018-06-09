@@ -20,9 +20,11 @@ class HomeScreen extends React.Component {
     };
   };
   componentDidMount() {
+   
     this.props.fetchPosts();
   }
   renderPosts() {
+    console.log(this.props.posts);
     if (this.props.posts) {
       return this.props.posts.map(post => {
         return (

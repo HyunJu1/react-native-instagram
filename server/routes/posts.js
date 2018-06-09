@@ -8,15 +8,18 @@ const catchErrors = require('../utils/async-error');
 
 
 router.get('/', catchErrors(async (req, res) => {
-  const posts = await Posts.all();
-  res.status(200).send(posts);
+  const posts = await Posts.findAll({});
+  res.json(posts);
+  // if (posts) {
+  //   res.status(200).send(posts);
+  // }
 }));
 
 router.get('/:id', catchErrors(async (req, res) => {
   const post = await Posts.findById(req.params.id);
   if (post) {
     res.status(200).send(post);
-  } else {
+  }else {
     res.status(404).send({error: 'Not exist id'});
   }
 }));

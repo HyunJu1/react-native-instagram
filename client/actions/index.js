@@ -3,7 +3,7 @@ import qs from 'qs';
 import { AsyncStorage } from 'react-native';
 import { Config } from '../config';
 import NavigationService from '../navigation_service';
-export const FETCH_POSTS = 'fetch_posts';
+// export const FETCH_POSTS = 'fetch_posts';
 export const FETCH_POST = 'fetch_post';
 export const CREATE_POST = 'create_post';
 export const DELETE_POST = 'delete_post';
@@ -62,12 +62,16 @@ export function fetchUsers() {
   };
 }
 
-//////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 export function fetchPosts() {
-  return {
-    type: FETCH_POSTS,
-    payload: axios.get(`${Config.server}/posts`)
+  return dispatch => {
+    console.log(axios.defaults.headers.common);
+    axios.get(`${Config.server}/posts`).then( response => {
+      dispatch({type: 'FETCHED_POSTS', payload: response.data});
+    }).catch(err => {
+      console.log(err.response);
+    })
   };
 }
 
