@@ -125,6 +125,9 @@ renderSection() {
   }
   render() {
       console.log(this.props.profile);
+      const imageSource={
+        uri:this.props.profile.image
+    }
     return (
       <Container style={styles.container}>
 
@@ -138,7 +141,8 @@ renderSection() {
                   {/**User photo takes 1/3rd of view horizontally **/}
                   <View
                       style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-                      <Image source={require('../assets/me2.png')}
+                      
+                      <Image source={imageSource}
                           style={{ width: 75, height: 75, borderRadius: 37.5 }} />
 
                   </View>

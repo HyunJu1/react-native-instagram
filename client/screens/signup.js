@@ -79,6 +79,11 @@ class SignUpScreen extends React.Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {  };
+} 
+export default connect(mapStateToProps, { signup })(SignUpScreen);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -139,4 +144,3 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   }
 });
-export default connect(null, { signup })(SignUpScreen);

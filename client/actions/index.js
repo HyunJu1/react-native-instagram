@@ -49,23 +49,6 @@ export function signout() {
   };
 }
 
-export function signup(username, password) {
-  return (dispatch) => {
-
-      axios.get('https://randomuser.me/api/').then(([response]) => {
-      var createUser = {
-        username,
-        password,
-      
-      };
-      return axios.post(`${Config.server}/api/users`,
-      createUser);
-    }).catch(err => {
-      console.log(err.response);
-    });
-  }
-}
-
 
 
 export function fetchUsers() {
@@ -109,6 +92,24 @@ export function updatePost(id, values, callback) {
     payload: axios.put(`/posts/${id}`, values).then(() => callback())
   };
 }
+
+export function signup(username, password) {
+  return (dispatch,getState) => {
+
+      axios.get('https://randomuser.me/api/').then(response => {
+      var createUser = {
+        username,
+        password,
+        image:response.data.results[0].picture.medium,     
+      };
+      return axios.post(`${Config.server}/api/users`,  
+      createUser);
+    }).catch(err => {
+      console.log(err.response);
+    });
+  }
+}
+
 
 export function createPost(title, content) {
   return (dispatch,getState) => {

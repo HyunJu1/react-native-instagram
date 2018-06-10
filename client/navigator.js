@@ -16,12 +16,10 @@ import SearchScreen from './tabnavigator/SearchTab';
 import ProfileScreen from './tabnavigator/ProfileTab';
 import { Theme } from './config';
 
+import { connect } from 'react-redux';
+import { fetchUsers } from './actions';
 
-// const App = StackNavigator({
-//   Home: { screen: SignInScreen },
-//   Profile: { screen: SignUpScreen },
-// });
-// const signupStack=createStackNavigator({  });
+
 const AuthStack = createStackNavigator({ SignIn: SignInScreen,SignUp: SignUpScreen });
 const HomeStack = createStackNavigator({ Home: HomeScreen, Profile: ProfileScreen });
 const SearchStack = createStackNavigator({ Search: SearchScreen });
@@ -42,8 +40,7 @@ const RootStack = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Profile') {
-          return <Image style={{ width: 28, height: 28, borderRadius: 14 }}
-            source={ require('./assets/me2.png')} />;
+          iconName = `ios-person${focused ? '' : '-outline'}`;
         }
         if (routeName === 'Home') {
           iconName = `ios-home${focused ? '' : '-outline'}`;
