@@ -12,24 +12,17 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
-import { signin } from '../actions';
-
+import { signup } from '../actions';
 const { width, height } = Dimensions.get("window");
+
 
 const background = require("../assets/login1_bg.png");
 const mark = require("../assets/instagram_logo.png");
 const lockIcon = require("../assets/login1_lock.png");
 const personIcon = require("../assets/login1_person.png");
-import {
-  StackNavigator,
-} from 'react-navigation';
 
-
-
-class SignInScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome',
-  };
+class SignUpScreen extends React.Component {
+ 
   constructor(props) {
     super(props);
     this.state = {
@@ -38,18 +31,20 @@ class SignInScreen extends React.Component {
     };
   }
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
       <ImageBackground source={background} style={styles.background} resizeMode="cover">
-        <View style={styles.markWrap}>
-          <Image source={mark} style={styles.mark} resizeMode="contain" />
+        <View  style={styles.text}>
+          <Text style={styles.navBarText}>SIGN UP</Text>
         </View>
         <View style={styles.wrapper}>
           <View style={styles.inputWrap}>
+          <Text>아이디를 입력하세요</Text>
             <View style={styles.iconWrap}>
+
               <Image source={personIcon} style={styles.icon} resizeMode="contain" />
             </View>
+            
             <TextInput placeholder="Username" style={styles.input}
               onChangeText={(username) => this.setState({ username })}
               spellCheck={false}
@@ -59,32 +54,25 @@ class SignInScreen extends React.Component {
               />
                  </View>
             <View style={styles.inputWrap}>
+            <Text>비밀번호를 입력하세요</Text>
               <View style={styles.iconWrap}>
                 <Image source={lockIcon} style={styles.icon} resizeMode="contain" />
               </View>
+              
         <TextInput placeholder="Password" style={styles.input}
           onChangeText={(password) => this.setState({ password })}
-          value={this.state.password}
-          secureTextEntry={true} />
+          value={this.state.password} spellCheck={false}
+          autoCorrect={false}
+          autoCapitalize='none'
+           />
            </View>
             <TouchableOpacity activeOpacity={.5}>
             
-        <Button color="#ff3366" title="Sign in" onPress={() => {
-          this.props.signin(this.state.username, this.state.password);
-        }} disabled={!this.state.username || !this.state.password }
-          />
+        <Button color="#ff3366" title="Sign Up" onPress={() => {
+          this.props.signup(this.state.username, this.state.password);
+        }} />
      
             </TouchableOpacity>
-          </View>
-          <View style={styles.container}>
-            <View style={styles.signupWrap}>
-              <Text style={styles.accountText}>Don't have an account?</Text>
-              <TouchableOpacity activeOpacity={.5}>
-                <View>
-                  <Button style={styles.signupLinkText} onPress={() => { navigate('SignUp'); }} title="Sign Up" color="#ff3366"></Button>
-                </View>
-              </TouchableOpacity>
-            </View>
           </View>
         </ImageBackground>
       </View>
@@ -97,10 +85,20 @@ const styles = StyleSheet.create({
   },
   markWrap: {
     flex: 1,
-    paddingHorizontal: 30,
+
   },
+  text: {
+
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  navBarText: {
+    fontSize: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  }, 
   mark: {
-    width: 300,
+    width: null,
     height: null,
     flex: 1,
 
@@ -133,19 +131,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
 
-  signupWrap: {
-    backgroundColor: "transparent",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   accountText: {
-    color: "#D8D8D8",
-    paddingHorizontal:10
+    color: "#D8D8D8"
   },
   signupLinkText: {
     color: "#FFF",
     marginLeft: 5,
   }
 });
-export default connect(null, { signin })(SignInScreen);
+export default connect(null, { signup })(SignUpScreen);

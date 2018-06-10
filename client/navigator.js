@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { StackNavigator,createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import AuthLoadingScreen from './screens/auth_loading';
 import SignInScreen from './screens/signin';
+import SignUpScreen from './screens/signup';
 
 import HomeScreen from './tabnavigator/HomeTab';
 import HeartScreen from './tabnavigator/LikeTab';
@@ -15,13 +16,18 @@ import SearchScreen from './tabnavigator/SearchTab';
 import ProfileScreen from './tabnavigator/ProfileTab';
 import { Theme } from './config';
 
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+
+// const App = StackNavigator({
+//   Home: { screen: SignInScreen },
+//   Profile: { screen: SignUpScreen },
+// });
+// const signupStack=createStackNavigator({  });
+const AuthStack = createStackNavigator({ SignIn: SignInScreen,SignUp: SignUpScreen });
 const HomeStack = createStackNavigator({ Home: HomeScreen, Profile: ProfileScreen });
 const SearchStack = createStackNavigator({ Search: SearchScreen });
 const WriteStack = createStackNavigator({ Write: WriteScreen });
 const HeartStack = createStackNavigator({ Heart: HeartScreen });
 const ProfileStack = createStackNavigator({ Profile: ProfileScreen });
-
 const RootStack = createBottomTabNavigator(
   {
     Home: HomeStack,

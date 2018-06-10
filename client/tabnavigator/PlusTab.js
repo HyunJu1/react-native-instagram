@@ -35,7 +35,7 @@ class PlusTab extends React.Component {
       </View>
       <View style={styles.footer}>
         <View style={styles.viewAcessar}>
-          <Button style={styles.btnAcessar} title="Upload" onPress={() => this.props.createPost(this.state.title,this.state.contents)} />
+          <Button color="#ff3366" title="Upload" onPress={() => this.props.createPost(this.state.title,this.state.contents)} />
         </View>
       </View>
     </View>
@@ -48,10 +48,14 @@ function mapStateToProps(state) {
 } 
 export default connect(mapStateToProps, { createPost })(PlusTab);
 
+
+
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 10
+    padding: 10,
+    backgroundColor:"#ffffff"
 	},
 	content: {
 		flex: 4,
@@ -71,9 +75,7 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	viewAcessar: {
-		backgroundColor: "#115E54"
+		backgroundColor: "#ffffff"
 	},
-	btnAcessar: {
-		color: "#ffffff"
-	}
+
 });

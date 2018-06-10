@@ -35,10 +35,10 @@ class CardComponent extends Component {
                 <CardItem cardBody>
                     <Image source={imageSource} style={{ height: 200, width: null, flex: 1 }} />
                 </CardItem>
-                <CardItem style={{ height: 45 }}>
+                <CardItem style={{ height: 50 , width:null}}>
                     <Left>
-                        <Button transparent>
-                            <Icon name="ios-heart-outline" style={{ color: 'black' }} size={30} />
+                        <Button  transparent>
+                            <Icon name="ios-heart-outline" style={{ color: 'black' }} size={35} />
                         </Button>
                         <Button transparent>
                             <Icon name="ios-chatbubbles-outline" style={{ color: 'black' }} size={30} />

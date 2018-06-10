@@ -35,6 +35,10 @@ export function signin(username, password) {
     }  
   };}  
 
+
+
+
+
 export function signout() {
   console.log("SIGNOUT!!");
   return async dispatch => {
@@ -45,6 +49,22 @@ export function signout() {
   };
 }
 
+export function signup(username, password) {
+  return (dispatch) => {
+
+      axios.get('https://randomuser.me/api/').then(([response]) => {
+      var createUser = {
+        username,
+        password,
+      
+      };
+      return axios.post(`${Config.server}/api/users`,
+      createUser);
+    }).catch(err => {
+      console.log(err.response);
+    });
+  }
+}
 
 
 
