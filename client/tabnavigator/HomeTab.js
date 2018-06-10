@@ -11,7 +11,7 @@ import {
   Platform
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchPosts,fetchUsers } from '../actions';
 import { Ionicons } from '@expo/vector-icons';
 import {Container,Content, Thumbnail,Header,Left,Right,Body} from 'native-base';
 import CardComponent from '../screens/CardComponent'
@@ -33,6 +33,7 @@ class HomeScreen extends React.Component {
   componentDidMount() {
    
     this.props.fetchPosts();
+    this.props.fetchUsers();
     const url = 'https://next.json-generator.com/api/json/get/V1HGd7LnV'
     fetch(url)
     .then((response) => response.json())
@@ -89,9 +90,9 @@ class HomeScreen extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return { posts: state.posts , users: state.users};
 }
-export default connect(mapStateToProps, { fetchPosts })(HomeScreen);
+export default connect(mapStateToProps, { fetchPosts,fetchUsers })(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {

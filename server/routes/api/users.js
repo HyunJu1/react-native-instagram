@@ -7,7 +7,6 @@ var router = express.Router();
 module.exports = function(app) {
 
   router.post('/', asyncError(async (req, res, next) => {
-    console.log('여기까지 왔나여');
     db.User.create({
       username: req.body.username,
       password: req.body.password,

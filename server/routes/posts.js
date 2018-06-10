@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Posts = require('../models').Post;
-
+const Users = require('../models').User;
 
 const catchErrors = require('../utils/async-error');
 
@@ -10,16 +10,19 @@ const catchErrors = require('../utils/async-error');
 router.get('/', catchErrors(async (req, res) => {
   const posts = await Posts.findAll({});
   res.json(posts);
-  // if (posts) {
-  //   res.status(200).send(posts);
-  // }
+
 }));
 
-// router.get('/myposts/:id', catchErrors(async (req, res) => {
-//   const post = await User.findById(req.params.id);
-//   res.json(posts);
+router.get('/mypost/:id', catchErrors(async (req, res) => {
+  console.log('여기왔나요?');
+  const myposts = await Posts.findAll({
+    where: {
+      name: req.params.id
+    },});
+  console.log(myposts);
+  res.json(myposts);
 
-// }));
+}));
 
 router.get('/:id', catchErrors(async (req, res) => {
   const post = await Posts.findById(req.params.id);

@@ -21,11 +21,14 @@ class CardComponent extends Component {
         const imageSource={
             uri:this.props.imageSource
         }
+        const profileImage={
+            uri:this.props.myProfile
+        }
         return (
             <Card>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={require('../assets/me2.png')} />
+                        <Thumbnail source={profileImage} />
                         <Body>
                             <Text>{this.props.name} </Text>
                             <Text note>{this.props.createdAt} </Text>

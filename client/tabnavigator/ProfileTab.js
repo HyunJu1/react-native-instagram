@@ -10,9 +10,9 @@ import {
   FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchUsers } from '../actions';
+import { fetchUsers, fetchMyPost } from '../actions';
 import { Ionicons,  MaterialCommunityIcons } from '@expo/vector-icons';
-import { Container, Content, Icon, Header, Left, Body, Right,   Button,Segment } from 'native-base'
+import { Container, Content, Icon, Header, Left, Body, Right, Button,Segment } from 'native-base'
 import CardComponent from '../screens/CardComponent'
 var { height, width } = Dimensions.get('window');
 var images = [
@@ -75,22 +75,25 @@ class ProfileScreen extends React.Component {
     }
 
 renderSectionOne() {
-  return images.map((image, index) => {
-      return (
-          <View key={index} style={[{ width: (width) / 3 }, { height: (width) / 3 }, { marginBottom: 2 }, index % 3 !== 0 ? { paddingLeft: 2 } : { paddingLeft: 0 }]}>
-              <Image style={{
-                  flex: 1,
-                  alignSelf: 'stretch',
-                  width: undefined,
-                  height: undefined,
+    return this.props.myPost.map((post,index) => {
+        const imageSource={
+            uri:post.image
+        }
+            return (
+                <View key={index} style={[{ width: (width) / 3 }, { height: (width) / 3 }, { marginBottom: 2 }, index % 3 !== 0 ? { paddingLeft: 2 } : { paddingLeft: 0 }]}>
+                    <Image style={{
+                        flex: 1,
+                        alignSelf: 'stretch',
+                        width: undefined,
+                        height: undefined,
 
-              }}
-                  source={image}>
-              </Image>
+                    }}
+                        source={imageSource}>
+                    </Image>
 
-          </View>
-      )
-  })
+                </View>
+            )
+  });
 
 }
 
@@ -107,21 +110,22 @@ renderSection() {
 
   }
   else if (this.state.activeIndex == 1) {
-      return (
-          <View>
-              
-              <CardComponent imageSource="1" likes="101" />
-              <CardComponent imageSource="2" likes="101" />
-              <CardComponent imageSource="2" likes="101" />
-              <CardComponent imageSource="2" likes="101" />
-              <CardComponent imageSource="2" likes="101" />
-              <CardComponent imageSource="3" likes="101" />
-          </View>
-      )
+    if (this.props.myPost) {
+        return this.props.myPost.map(post => {
+          return (
+   
+            <View>
+              <CardComponent myProfile={post.name.image} imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
+            </View>
+         
+          );
+        });
+      }
   }
 }
   componentDidMount() {
     this.props.fetchUsers();
+    this.props.fetchMyPost();
   }
   render() {
       console.log(this.props.profile);
@@ -252,15 +256,18 @@ renderSection() {
 }
 
 function mapStateToProps(state) {
-  return { profile: state.loginUser };
+  return { 
+      profile: state.loginUser ,
+      myPost:state.posts,
+      users:state.users
+};
 }
-export default connect(mapStateToProps, { fetchUsers })(ProfileScreen);
+export default connect(mapStateToProps, { fetchUsers,fetchMyPost })(ProfileScreen);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
     justifyContent: 'center',
   },
 });

@@ -21,7 +21,9 @@ function loginUser(state = [], action) {
 function posts(state = [], action) {
   switch (action.type) {
     case 'FETCHED_POSTS':
-    return action.payload;
+      return action.payload;
+    case 'FETCHED_MY_POST':
+      return action.payload;
     case DELETE_POST + '_FULFILLED':
       return _.omit(state, action.payload);
     case FETCH_POST + '_FULFILLED':

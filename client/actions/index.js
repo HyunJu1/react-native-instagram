@@ -70,7 +70,6 @@ export function fetchUsers() {
 
 export function fetchPosts() {
   return dispatch => {
-    console.log(axios.defaults.headers.common);
     axios.get(`${Config.server}/posts`).then( response => {
       dispatch({type: 'FETCHED_POSTS', payload: response.data});
     }).catch(err => {
@@ -85,6 +84,16 @@ export function fetchPost(id) {
     payload: axios.get(`/posts/${id}`)
   };
 }
+export function fetchMyPost() {
+  return (dispatch,getState) => {
+    axios.get(`${Config.server}/posts/mypost/${getState().loginUser.username}`).then( response => {
+      dispatch({type: 'FETCHED_MY_POST', payload: response.data});
+    }).catch(err => {
+      console.log(err.response);
+    })
+  };
+}
+
 
 export function updatePost(id, values, callback) {
   return {
