@@ -16,10 +16,10 @@ import { signin } from '../actions';
 const { width, height } = Dimensions.get("window");
 
 
-const background = require("../assets/me2.png");
-const mark = require("../assets/me2.png");
-const lockIcon = require("../assets/me2.png");
-const personIcon = require("../assets/me2.png");
+const background = require("../assets/login1_bg.png");
+const mark = require("../assets/instagram_logo.png");
+const lockIcon = require("../assets/login1_lock.png");
+const personIcon = require("../assets/login1_person.png");
 
 class SignInScreen extends React.Component {
  
@@ -61,7 +61,7 @@ class SignInScreen extends React.Component {
            </View>
             <TouchableOpacity activeOpacity={.5}>
             
-        <Button style={styles.buttonText} title="Sign in" onPress={() => {
+        <Button  style={styles.buttonText} title="Sign in" onPress={() => {
           this.props.signin(this.state.username, this.state.password);
         }} disabled={!this.state.username || !this.state.password }
           style={styles.button}/>
@@ -89,12 +89,13 @@ const styles = StyleSheet.create({
   },
   markWrap: {
     flex: 1,
-    paddingVertical: 30,
+    paddingHorizontal: 30,
   },
   mark: {
-    width: null,
+    width: 300,
     height: null,
     flex: 1,
+
   },
   background: {
     width,
@@ -131,8 +132,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   buttonText: {
-    color: "#FFF",
-    fontSize: 18,
+    backgroundColor: "#FF3366",
+    paddingVertical: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
   },
 
   signupWrap: {
