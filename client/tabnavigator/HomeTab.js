@@ -51,9 +51,11 @@ class HomeScreen extends React.Component {
     if (this.props.posts) {
       return this.props.posts.map(post => {
         return (
+ 
           <View>
-            <CardComponent imageSource='https://loremflickr.com/320/240?random=1' likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
+            <CardComponent imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
           </View>
+       
         );
       });
     }

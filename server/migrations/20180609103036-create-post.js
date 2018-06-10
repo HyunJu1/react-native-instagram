@@ -27,7 +27,7 @@ module.exports = {
       },
       image: {
         allowNull: true,
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       likes: {
         allowNull: true,

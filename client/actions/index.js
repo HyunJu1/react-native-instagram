@@ -23,9 +23,7 @@ export function signin(username, password) {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
 
-      console.log("RESULT", response.data);
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
-      console.log(`Bearer ${response.data.access_token}`);
       await AsyncStorage.setItem('accessToken', response.data.access_token);
 
       const loginUser = await axios.get(`${Config.server}/api/users/me`);
@@ -52,7 +50,6 @@ export function signout() {
 
 export function fetchUsers() {
   return dispatch => {
-    console.log(axios.defaults.headers.common);
     axios.get(`${Config.server}/api/users`).then( response => {
       dispatch({type: 'FETCHED_USERS', payload: response.data});
     }).catch(err => {
@@ -93,12 +90,25 @@ export function updatePost(id, values, callback) {
   };
 }
 
-export function createPost(values, callback) {
-  const request = axios.post('/posts', values).then(() => callback());
-
-  return {
-    type: CREATE_POST,
-    payload: request
+export function createPost(title, content) {
+  return (dispatch,getState) => {
+    Promise.all([
+      
+      axios.get('https://picsum.photos/400/200/?random'),
+      getState().loginUser
+    ]).then(([response,loginUser]) => {
+      var posting = {
+        title,
+        content,
+        name: loginUser.username,
+        image: response.request.responseURL,
+        likes: 0,
+      };
+      return axios.post(`${Config.server}/posts`,
+        posting);
+    }).catch(err => {
+      console.log(err.response);
+    });
   }
 }
 
