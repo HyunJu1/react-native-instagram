@@ -111,11 +111,13 @@ renderSection() {
   }
   else if (this.state.activeIndex == 1) {
     if (this.props.myPost) {
+      
         return this.props.myPost.map(post => {
+            console.log(post.User.image)
           return (
-   
+   //myProfile={post.User.image}
             <View>
-              <CardComponent myProfile={post.name.image} imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
+              <CardComponent  imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.UserId} content={post.content}/>
             </View>
          
           );

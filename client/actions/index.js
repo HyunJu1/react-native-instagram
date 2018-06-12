@@ -94,7 +94,7 @@ export function fetchPosts() {
     axios.get(`${Config.server}/posts`).then( response => {
       dispatch({type: 'FETCHED_POSTS', payload: response.data});
     }).catch(err => {
-      console.log(err.response);
+      console.log('fetchPosts err'+err.response);
     })
   };
 }
@@ -143,7 +143,6 @@ export function updatePost(id, values, callback) {
 
 
 export function createPost(title, content) {
-  const { navigate } = this.props.navigation;
   return (dispatch,getState) => {
     Promise.all([
       
@@ -153,14 +152,12 @@ export function createPost(title, content) {
       var posting = {
         title,
         content,
-        name: loginUser.username,
+        name: loginUser.id,
         image: response.request.responseURL,
         likes: 0,
       };
       return axios.post(`${Config.server}/posts`,
         posting);
-    }).then(response=>{
-      navigate('SignIn')
     })
     .catch(err => {
       console.log(err.response);

@@ -63,7 +63,7 @@ class HomeScreen extends React.Component {
           <View>
 
     
-                <CardComponent imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
+                <CardComponent imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.UserId} content={post.content}/>
        
           </View>
        

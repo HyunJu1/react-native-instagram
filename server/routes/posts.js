@@ -8,8 +8,13 @@ const catchErrors = require('../utils/async-error');
 
 
 router.get('/', catchErrors(async (req, res) => {
-  const posts = await Posts.findAll({});
+  const users=Posts.belongsTo(Users);
+  const posts = await Posts.findAll({
+    include:[users]
+  });
+  console.log("posts:"+posts);
   res.json(posts);
+  
 
 }));
 
@@ -17,7 +22,7 @@ router.get('/mypost/:id', catchErrors(async (req, res) => {
   console.log('여기왔나요?');
   const myposts = await Posts.findAll({
     where: {
-      name: req.params.id
+      UserId: req.params.id
     },
    
   });
@@ -40,7 +45,7 @@ router.put('/:id', catchErrors(async (req, res) => {
   if (post) {
     await post.update({
       title: req.body.title || post.title,
-      name: req.body.name || post.name,
+      UserId: req.body.name || post.name,
       content: req.body.content || post.content
     });
     res.status(200).send(post);
@@ -53,7 +58,7 @@ router.post('/', catchErrors(async (req, res) => {
   const post = await Posts.create({
 
     title: req.body.title,
-    name: req.body.name,
+    UserId: req.body.name,
     content: req.body.content,
     image:req.body.image,
     likes:req.body.likes
@@ -73,7 +78,7 @@ router.delete('/:id', catchErrors(async (req, res) => {
     res.status(204).send({});
   } else {
     res.status(404).send({ error: 'Not exist id' });
-  }
+  } 
 }));
 
 module.exports = router;
