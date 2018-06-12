@@ -29,6 +29,7 @@ export function signin(username, password) {
       const loginUser = await axios.get(`${Config.server}/api/users/me`);
       dispatch({type: 'FETCHED_LOGIN_USER', payload: loginUser.data});
       NavigationService.navigate('App');
+     
     } catch (err) {  
       console.log(err.response || err);
       alert('Invalid ID or Password');
@@ -36,6 +37,26 @@ export function signin(username, password) {
   };}  
 
 
+export function signup(username, password) {
+  return (dispatch,getState) => {
+try{
+      axios.get('https://randomuser.me/api/').then(response => {
+      var createUser = {
+        username,
+        password,
+        image:response.data.results[0].picture.medium,     
+      };
+       axios.post(`${Config.server}/api/users`, createUser);
+       NavigationService.navigate('Sign');
+       alert('성공적으로 가입 완료 되었습니다. ');
+       
+    })
+  }catch(err) {
+      console.log(err.response);
+      alert('ID가 이미 존재합니다.');
+    };
+  }
+}
 
 
 
@@ -119,28 +140,10 @@ export function updatePost(id, values, callback) {
   };
 }
 
-export function signup(username, password) {
-  return (dispatch,getState) => {
-
-      axios.get('https://randomuser.me/api/').then(response => {
-      var createUser = {
-        username,
-        password,
-        image:response.data.results[0].picture.medium,     
-      };
-      return axios.post(`${Config.server}/api/users`,  
-      createUser);
-    }).then(
-     
-    )
-    .catch(err => {
-      console.log(err.response);
-    });
-  }
-}
 
 
 export function createPost(title, content) {
+  const { navigate } = this.props.navigation;
   return (dispatch,getState) => {
     Promise.all([
       
@@ -156,7 +159,10 @@ export function createPost(title, content) {
       };
       return axios.post(`${Config.server}/posts`,
         posting);
-    }).catch(err => {
+    }).then(response=>{
+      navigate('SignIn')
+    })
+    .catch(err => {
       console.log(err.response);
     });
   }

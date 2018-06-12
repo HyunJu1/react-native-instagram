@@ -20,6 +20,9 @@ const background = require("../assets/login1_bg.png");
 const mark = require("../assets/instagram_logo.png");
 const lockIcon = require("../assets/login1_lock.png");
 const personIcon = require("../assets/login1_person.png");
+import {
+  StackNavigator,
+} from 'react-navigation';
 
 class SignUpScreen extends React.Component {
  
@@ -31,6 +34,7 @@ class SignUpScreen extends React.Component {
     };
   }
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
       <ImageBackground source={background} style={styles.background} resizeMode="cover">
@@ -70,6 +74,7 @@ class SignUpScreen extends React.Component {
             
         <Button color="#ff3366" title="Sign Up" onPress={() => {
           this.props.signup(this.state.username, this.state.password);
+          // navigate('SignIn'); 
         }} />
      
             </TouchableOpacity>

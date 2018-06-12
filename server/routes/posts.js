@@ -51,6 +51,7 @@ router.put('/:id', catchErrors(async (req, res) => {
 
 router.post('/', catchErrors(async (req, res) => {
   const post = await Posts.create({
+
     title: req.body.title,
     name: req.body.name,
     content: req.body.content,
@@ -58,7 +59,11 @@ router.post('/', catchErrors(async (req, res) => {
     likes:req.body.likes
     
   });
-  res.status(201).send(post);
+  if(post){
+    res.status(201).send(post);}
+  else {
+    res.status(422).send({err: 'Not exist id' });
+  }
 }));
 
 router.delete('/:id', catchErrors(async (req, res) => {
