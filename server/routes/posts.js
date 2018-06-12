@@ -34,12 +34,18 @@ router.get('/mypost/:id', catchErrors(async (req, res) => {
 }));
 
 router.get('/:id', catchErrors(async (req, res) => {
-  const post = await Posts.findById(req.params.id);
-  if (post) {
-    res.status(200).send(post);
-  }else {
-    res.status(404).send({error: 'Not exist id'});
-  }
+  console.log('여기왔지?');
+  const users=Posts.belongsTo(Users);
+  const postDetail = await Posts.findAll({
+    where: {
+      id: req.params.id
+    },
+    include:[users]
+   
+  });
+  console.log(postDetail);
+  res.json(postDetail);
+
 }));
 
 router.put('/:id', catchErrors(async (req, res) => {

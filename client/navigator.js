@@ -9,6 +9,8 @@ import AuthLoadingScreen from './screens/auth_loading';
 import SignInScreen from './screens/signin';
 import SignUpScreen from './screens/signup';
 
+import MyPostDetailScreen from './screens/MyPostDetail';
+
 import HomeScreen from './tabnavigator/HomeTab';
 import HeartScreen from './tabnavigator/LikeTab';
 import WriteScreen from './tabnavigator/PlusTab';
@@ -19,6 +21,7 @@ import { Theme } from './config';
 import { connect } from 'react-redux';
 import { fetchUsers } from './actions';
 
+const PostDetailStack = createStackNavigator({Profile: ProfileScreen, PostDetail: MyPostDetailScreen  });
 const SignStack = createStackNavigator({ SignIn: SignInScreen });
 const HomesStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ SignIn: SignInScreen,SignUp: SignUpScreen });
@@ -33,7 +36,8 @@ const RootStack = createBottomTabNavigator(
     Search: SearchStack,
     Write: WriteStack,
     Heart: HeartStack,
-    Profile: ProfileStack
+    Profile: PostDetailStack,
+
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -70,7 +74,8 @@ const AppNavigator = createSwitchNavigator(
     App: RootStack,
     Auth: AuthStack,
     Sign:SignStack,
-    Home:HomesStack
+    Home:HomeStack,
+    PostDetail:PostDetailStack
   },
   {
     initialRouteName: 'AuthLoading',

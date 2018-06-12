@@ -4,12 +4,14 @@ import {
   Button,
   Text,
   StyleSheet,
+  ListView,
   AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
 import { Ionicons } from '@expo/vector-icons';
-
+import Timestamp from 'react-timestamp';
+import { Card, CardItem, Thumbnail, Body, Left, Right } from 'native-base';
 class LikeTab extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -23,13 +25,26 @@ class LikeTab extends React.Component {
     this.props.fetchUsers();
   }
   renderUsers() {
+  
     if (this.props.users) {
-      return this.props.users.map(user => {
+      return this.props.users.map(user => {  
+        const profileImage={
+        uri:user.image
+      }
         return (
-          <View style={styles.card} key={user.id}>
-            <Text>{user.username}</Text>
-          </View>
-        );
+  
+          
+<View key={user.id} style={styles.image}>
+        
+          <Body>
+            
+          <Thumbnail style={{  paddingTop:30}} source={profileImage} />
+              <Text>{user.username} </Text>
+              <Text note><Timestamp time={user.createdAt}component={Text} format='full'/>  </Text>
+              </Body>
+</View>
+        
+      );
       });
     }
   }
@@ -69,10 +84,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "stretch"
   },
-  card: {
-    alignSelf: "stretch",
-    padding: 30,
-    borderBottomWidth: 5,
-    borderBottomColor: '#EEE'
-  }
+  image: {
+    flex: 1,
+    alignSelf: "stretch"
+  },
+
 });

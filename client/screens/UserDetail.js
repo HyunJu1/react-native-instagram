@@ -19,7 +19,7 @@ var { height, width } = Dimensions.get('window');
 import NavigationService from '../navigation_service';
 import {  StackNavigator,} from 'react-navigation';
 
-class ProfileScreen extends React.Component {
+class UserDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
 
@@ -260,7 +260,7 @@ function mapStateToProps(state) {
    
 };
 }
-export default connect(mapStateToProps, { fetchMyProfile,fetchMyPost })(ProfileScreen);
+export default connect(mapStateToProps, { fetchYourProfile,fetchYourPost })(UserDetail);
 
 const styles = StyleSheet.create({
   container: {

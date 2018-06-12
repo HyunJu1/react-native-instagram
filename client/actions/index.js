@@ -107,16 +107,16 @@ export function fetchPost(id) {
     axios.get(`${Config.server}/posts/${id}`).then( response => {
       dispatch({type: 'FETCHED_POST', payload: response.data});
     }).catch(err => {
-      console.log('fetchPosts err'+err.response);
+      console.log('fetchPost err'+err.response);
     })
   };
 }
 
 
 export function fetchMyPost() {
-  return (dispatch,getState) => {
-    console.log('loginuser:'+getState().loginUser)
-    axios.get(`${Config.server}/posts/mypost/${getState().loginUser.id}`).then( response => {
+  return async(dispatch,getState) => {
+    const idd=await getState().loginUser.id;
+    await axios.get(`${Config.server}/posts/mypost/${idd}`).then( response => {
       dispatch({type: 'FETCHED_MY_POST', payload: response.data});
     }).catch(err => {
       console.log(err.response);
