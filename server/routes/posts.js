@@ -20,10 +20,12 @@ router.get('/', catchErrors(async (req, res) => {
 
 router.get('/mypost/:id', catchErrors(async (req, res) => {
   console.log('여기왔나요?');
+  const users=Posts.belongsTo(Users);
   const myposts = await Posts.findAll({
     where: {
       UserId: req.params.id
     },
+    include:[users]
    
   });
   console.log(myposts);

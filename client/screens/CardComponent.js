@@ -7,7 +7,7 @@ import {
 } from "react-native";
 
 import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Icon } from 'native-base'
-
+import Timestamp from 'react-timestamp';
 class CardComponent extends Component {
 
     render() {
@@ -26,7 +26,7 @@ class CardComponent extends Component {
                         <Thumbnail source={profileImage} />
                         <Body>
                             <Text>{this.props.name} </Text>
-                            <Text note>{this.props.createdAt} </Text>
+                            <Text note><Timestamp time={this.props.createdAt}component={Text} format='full'/>  </Text>
                         </Body>
                     </Left>
                 </CardItem>

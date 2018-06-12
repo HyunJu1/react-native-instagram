@@ -26,6 +26,7 @@ function posts(state = [], action) {
       return action.payload;
     case 'FETCHED_MY_POST':
       return action.payload;
+
     case DELETE_POST + '_FULFILLED':
       return _.omit(state, action.payload);
     case FETCH_POST + '_FULFILLED':
@@ -35,9 +36,19 @@ function posts(state = [], action) {
       return state;
   }
 }
+function post(state = [], action) {
+  switch (action.type) {
+    case 'FETCHED_POST':
+      return action.payload;
+      
+    default:
+      return state;
+  }
+}
 const rootReducer = combineReducers({
   users,
   posts,
+  post,
   loginUser
 });
 

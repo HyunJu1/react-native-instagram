@@ -14,6 +14,7 @@ import { fetchMyProfile, fetchMyPost } from '../actions';
 import { Ionicons,  MaterialCommunityIcons } from '@expo/vector-icons';
 import { Container, Content, Icon, Header, Left, Body, Right, Button,Segment } from 'native-base'
 import CardComponent from '../screens/CardComponent'
+import Timestamp from 'react-timestamp';
 var { height, width } = Dimensions.get('window');
 
 class ProfileScreen extends React.Component {
@@ -197,7 +198,7 @@ renderSection() {
               <View style={{ paddingBottom: 10 }}>
                   <View style={{ paddingHorizontal: 10 }}>
                       <Text style={{ fontWeight: 'bold' }}>{this.props.profile.username}</Text>
-                      <Text>가입날짜: {this.props.profile.createdAt} </Text>
+                      <Text>가입날짜: <Timestamp time={this.props.profile.createdAt} component={Text} format='date'/> </Text>
                   </View>
               </View>
 

@@ -3,8 +3,7 @@ import qs from 'qs';
 import { AsyncStorage } from 'react-native';
 import { Config } from '../config';
 import NavigationService from '../navigation_service';
-export const FETCH_POST = 'fetch_post';
-export const CREATE_POST = 'create_post';
+
 export const DELETE_POST = 'delete_post';
 export const UPDATE_POST = 'update_post';
 
@@ -104,31 +103,20 @@ export function fetchPosts() {
 }
 
 export function fetchPost(id) {
-  return {
-    type: FETCH_POST,
-    payload: axios.get(`/posts/${id}`)
+  return dispatch => {
+    axios.get(`${Config.server}/posts/${id}`).then( response => {
+      dispatch({type: 'FETCHED_POST', payload: response.data});
+    }).catch(err => {
+      console.log('fetchPosts err'+err.response);
+    })
   };
 }
 
 
-// export function fetchUser() {
-//   return dispatch => {
-//     axios.get(`${Config.server}/api/users`).then( response => {
-//       dispatch({type: 'FETCHED_USER', payload: response.data});
-//     }).catch(err => {
-//       console.log(err.response);
-//       if (err.response.status == 401) {
-//         dispatch(signout());
-//       } else {
-//         alert('Network Error');
-//       }
-//     });
-//   };
-// }
-
 export function fetchMyPost() {
   return (dispatch,getState) => {
-    axios.get(`${Config.server}/posts/mypost/${getState().loginUser.username}`).then( response => {
+    console.log('loginuser:'+getState().loginUser)
+    axios.get(`${Config.server}/posts/mypost/${getState().loginUser.id}`).then( response => {
       dispatch({type: 'FETCHED_MY_POST', payload: response.data});
     }).catch(err => {
       console.log(err.response);
