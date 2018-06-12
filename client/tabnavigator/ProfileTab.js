@@ -10,27 +10,18 @@ import {
   FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchUsers, fetchMyPost } from '../actions';
+import { fetchMyProfile, fetchMyPost } from '../actions';
 import { Ionicons,  MaterialCommunityIcons } from '@expo/vector-icons';
 import { Container, Content, Icon, Header, Left, Body, Right, Button,Segment } from 'native-base'
 import CardComponent from '../screens/CardComponent'
 var { height, width } = Dimensions.get('window');
-var images = [
-  require('../assets/feed_images/1.jpg'),
-  require('../assets/feed_images/2.jpg'),
-  require('../assets/feed_images/3.png'),
-  require('../assets/feed_images/1.jpg'),
-  require('../assets/feed_images/2.jpg'),
-  require('../assets/feed_images/3.png'),
 
-]
 class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerLeft: <Ionicons name="ios-camera"style={{ paddingLeft: 10 }}  size={32}  />,
       title: 'Instagram',
-      headerRight: 
-      
+      headerRight:     
       
       <MaterialCommunityIcons name="logout"style={{ paddingRight: 10 }}  size={28} 
       onPress={async()=>{await AsyncStorage.clear(); navigation.navigate('Auth');}}
@@ -113,11 +104,12 @@ renderSection() {
     if (this.props.myPost) {
       
         return this.props.myPost.map(post => {
-            console.log(post.User.image)
+ 
           return (
-   //myProfile={post.User.image}
+   // myProfile={post.User.image}
             <View>
-              <CardComponent  imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.UserId} content={post.content}/>
+             <CardComponent myProfile={post.User.image} imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.User.username} content={post.content}/>
+         
             </View>
          
           );
@@ -126,7 +118,8 @@ renderSection() {
   }
 }
   componentDidMount() {
-    this.props.fetchUsers();
+    console.log("Before fetchUsers call!");
+    this.props.fetchMyProfile();
     this.props.fetchMyPost();
   }
   render() {
@@ -261,10 +254,10 @@ function mapStateToProps(state) {
   return { 
       profile: state.loginUser ,
       myPost:state.posts,
-      users:state.users
+   
 };
 }
-export default connect(mapStateToProps, { fetchUsers,fetchMyPost })(ProfileScreen);
+export default connect(mapStateToProps, { fetchMyProfile,fetchMyPost })(ProfileScreen);
 
 const styles = StyleSheet.create({
   container: {

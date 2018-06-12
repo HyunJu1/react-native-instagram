@@ -26,8 +26,7 @@ export function signin(username, password) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
       await AsyncStorage.setItem('accessToken', response.data.access_token);
 
-      const loginUser = await axios.get(`${Config.server}/api/users/me`);
-      dispatch({type: 'FETCHED_LOGIN_USER', payload: loginUser.data});
+      dispatch(fetchMyProfile());
       NavigationService.navigate('App');
      
     } catch (err) {  
@@ -36,7 +35,12 @@ export function signin(username, password) {
     }  
   };}  
 
-
+export function fetchMyProfile() {
+  return async dispatch => {
+    const loginUser = await axios.get(`${Config.server}/api/users/me`);
+    dispatch({type: 'FETCHED_LOGIN_USER', payload: loginUser.data});
+  }
+}
 export function signup(username, password) {
   return (dispatch,getState) => {
 try{
@@ -156,8 +160,9 @@ export function createPost(title, content) {
         image: response.request.responseURL,
         likes: 0,
       };
-      return axios.post(`${Config.server}/posts`,
-        posting);
+      axios.post(`${Config.server}/posts`,posting);
+      NavigationService.navigate('Home');
+      alert('성공적으로 게시물을 등록하였습니다. ');
     })
     .catch(err => {
       console.log(err.response);

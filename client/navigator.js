@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import { fetchUsers } from './actions';
 
 const SignStack = createStackNavigator({ SignIn: SignInScreen });
+const HomesStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ SignIn: SignInScreen,SignUp: SignUpScreen });
 const HomeStack = createStackNavigator({ Home: HomeScreen, Profile: ProfileScreen });
 const SearchStack = createStackNavigator({ Search: SearchScreen });
@@ -68,7 +69,8 @@ const AppNavigator = createSwitchNavigator(
     AuthLoading: AuthLoadingScreen,
     App: RootStack,
     Auth: AuthStack,
-    Sign:SignStack
+    Sign:SignStack,
+    Home:HomesStack
   },
   {
     initialRouteName: 'AuthLoading',

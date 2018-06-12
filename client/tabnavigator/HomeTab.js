@@ -12,7 +12,7 @@ import {
   Platform
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchPosts,fetchUsers } from '../actions';
+import { fetchPosts ,fetchUsers} from '../actions';
 import { Ionicons } from '@expo/vector-icons';
 import {Container,Content, RefreshControl,ListView, Thumbnail,Header,Left,Right,Body} from 'native-base';
 import CardComponent from '../screens/CardComponent'
@@ -57,14 +57,14 @@ class HomeScreen extends React.Component {
 
   renderPosts() {
     if (this.props.posts) {
+      console.log(this.props.posts)
       return this.props.posts.map(post => {
         return (
- 
+ //myProfile={post.User.image}
           <View>
 
-    
-                <CardComponent imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.UserId} content={post.content}/>
-       
+            <CardComponent myProfile={post.User.image} imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.UserId} content={post.content}/>
+         
           </View>
        
         );
@@ -103,7 +103,7 @@ class HomeScreen extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts , users: state.users};
+  return { posts: state.posts };
 }
 export default connect(mapStateToProps, { fetchPosts,fetchUsers })(HomeScreen);
 
