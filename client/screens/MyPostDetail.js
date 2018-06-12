@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { fetchPost } from '../actions';
 import {Container,Content} from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
-import CardComponent from './CardComponent'
+import CardComponent from '../components/CardComponent'
 class MyPostDetail extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {

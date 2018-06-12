@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { fetchPosts ,fetchUsers} from '../actions';
 import { Ionicons } from '@expo/vector-icons';
 import {Container,Content, RefreshControl,ListView, Thumbnail,Header,Left,Right,Body} from 'native-base';
-import CardComponent from '../screens/CardComponent'
+import CardComponent from '../components/CardComponent'
 import PTRView from 'react-native-pull-to-refresh';
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {

@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { StackNavigator,createSwitchNavigator, createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import AuthLoadingScreen from './screens/auth_loading';
+import AuthLoadingScreen from './components/auth_loading';
 import SignInScreen from './screens/signin';
 import SignUpScreen from './screens/signup';
 

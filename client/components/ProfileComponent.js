@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -9,134 +9,17 @@ import {
   Dimensions,
   FlatList
 } from 'react-native';
-import { connect } from 'react-redux';
-import { fetchMyProfile, fetchMyPost } from '../actions';
-import { Ionicons,  MaterialCommunityIcons } from '@expo/vector-icons';
 import { Container, Content, Icon, Header, Left, Body, Right, Button,Segment } from 'native-base'
-import CardComponent from '../components/CardComponent'
 
 import Timestamp from 'react-timestamp';
-var { height, width } = Dimensions.get('window');
-import NavigationService from '../navigation_service';
-import {  StackNavigator,} from 'react-navigation';
 
-class ProfileScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
 
-      title: 'Instagram',
-      headerRight:     
-      
-      <MaterialCommunityIcons name="logout"style={{ paddingRight: 10 }}  size={28} 
-      onPress={async()=>{await AsyncStorage.clear(); navigation.navigate('Auth');}}
-      />
-      ,
 
-      };
-    };
-
-    constructor(props) {
-      super(props)
-
-      this.state = {
-          activeIndex: 0
-      }
-  }  
-  _showMoreApp = () => {
-    this.props.navigation.navigate('Other');
-  };
-
-  _signOutAsync = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
-
-  segmentClicked(index) {
-      this.setState({
-          activeIndex: index
-      })
-  }
-  checkActive = (index) => {
-      if (this.state.activeIndex !== index) {
-          return (
-              { color: 'grey' }
-          )
-      }
-      else {
-          return (
-              {}
-          )
-      }
-    }
-
-renderSectionOne() {
-    const { navigate } = this.props.navigation;
-    return this.props.myPost.map((post,index) => {
-        const imageSource={
-            uri:post.image
-        }
-        const idd=post.id
-        console.log("idd:"+idd)
-            return (
-                <TouchableOpacity onPress={()=>{console.log('idd2:'+idd);navigate('PostDetail',{idd})}}  >
-                
-                <View key={index} style={[{ width: (width) / 3 }, { height: (width) / 3 }, { marginBottom: 2 }, index % 3 !== 0 ? { paddingLeft: 2 } : { paddingLeft: 0 }]}>
-                        
-                        <Image style={{
-                            flex: 1,
-                            alignSelf: 'stretch',
-                            width: undefined,
-                            height: undefined,
-
-                        }} source={imageSource}  >
-                        </Image>
-                  
-                </View>
-                </TouchableOpacity> 
-            )
-  });
-
+const ProfileComponent = props => {
+  const imageSource={
+    uri: this.props.profile.image
 }
 
-renderSection() {
-
-  if (this.state.activeIndex == 0) {
-
-      return (
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-    
-              {this.renderSectionOne()}
-          </View>
-      )
-
-  }
-  else if (this.state.activeIndex == 1) {
-    if (this.props.myPost) {
-      
-        return this.props.myPost.map(post => {
- 
-          return (
-            <View>
-             <CardComponent myProfile={post.User.image} imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.User.username} content={post.content}/>
-         
-            </View>
-         
-          );
-        });
-      }
-  }
-}
-  componentDidMount() {
-    console.log("Before fetchUsers call!");
-    this.props.fetchMyProfile();
-    this.props.fetchMyPost();
-  }
-  render() {
-      
-      console.log(this.props.profile);
-      const imageSource={
-        uri: this.props.profile.image
-    }
     return (
       <Container style={styles.container}>
 
@@ -248,20 +131,11 @@ renderSection() {
           </View>
       </Content>
   </Container >
-);
-}
+       
+      )
+      };
 
-
-}
-
-function mapStateToProps(state) {
-  return { 
-      profile: state.loginUser ,
-      myPost:state.mypost,
-   
-};
-}
-export default connect(mapStateToProps, { fetchMyProfile,fetchMyPost })(ProfileScreen);
+export default ProfileComponent;
 
 const styles = StyleSheet.create({
   container: {
