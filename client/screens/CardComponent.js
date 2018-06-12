@@ -12,23 +12,18 @@ class CardComponent extends Component {
 
     render() {
 
-        const images = {
 
-            "1": require('../assets/feed_images/1.jpg'),
-            "2": require('../assets/feed_images/2.jpg'),
-            "3": require('../assets/feed_images/3.png')
-        }
         const imageSource={
             uri:this.props.imageSource
         }
         const profileImage={
-            uri:this.props.myProfile
+            uri:this.props.imageSource
         }
         return (
             <Card>
                 <CardItem>
                     <Left>
-                        <Thumbnail source={profileImage} />
+                        <Thumbnail source={require('../assets/me2.png')} />
                         <Body>
                             <Text>{this.props.name} </Text>
                             <Text note>{this.props.createdAt} </Text>

@@ -6,6 +6,8 @@ function users(state = [], action) {
   switch (action.type) {
     case 'FETCHED_USERS':
       return action.payload;
+    case 'FETCHED_USER':
+      return action.payload;
     default:
       return state;
   }

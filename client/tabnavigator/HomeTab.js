@@ -7,13 +7,14 @@ import {
   AsyncStorage,
   TouchableOpacity,
   ScrollView,
+
   FlatList,
   Platform
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchPosts,fetchUsers } from '../actions';
 import { Ionicons } from '@expo/vector-icons';
-import {Container,Content, Thumbnail,Header,Left,Right,Body} from 'native-base';
+import {Container,Content, ListView, Thumbnail,Header,Left,Right,Body} from 'native-base';
 import CardComponent from '../screens/CardComponent'
 class HomeScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -27,9 +28,17 @@ class HomeScreen extends React.Component {
   constructor() {
     super()
     this.state = {
-      dataSource: []
+      dataSource: [],
+      refreshing: false
     }
   }
+  _onRefresh() {
+    this.setState({refreshing: true});
+    fetchPosts().then(() => {
+      this.setState({refreshing: false});
+    });
+  }
+
   componentDidMount() {
    
     this.props.fetchPosts();
@@ -50,11 +59,14 @@ class HomeScreen extends React.Component {
   renderPosts() {
     console.log(this.props.posts);
     if (this.props.posts) {
+      console.log('props.posts'+this.props.posts)
       return this.props.posts.map(post => {
         return (
  
           <View>
-            <CardComponent imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
+             <ListView  >
+                <CardComponent imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.name} content={post.content}/>
+              </ListView>
           </View>
        
         );
@@ -66,8 +78,8 @@ class HomeScreen extends React.Component {
   render() {
     return (
 
-      <Container style={styles.container}>
-        <Content>
+      <Container style={styles.container} >
+        <Content >
             <View style={{ paddingTop: 10 }}>
            
                 {this.renderPosts()}

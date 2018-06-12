@@ -3,7 +3,7 @@ export const Theme = {
 };
 
 export const Config = {
-  server: 'http://172.16.193.41:3000',
+  server: 'http://192.168.0.101:3000',
   clientSecret: "123456789", 
   clientId: "ABCDEFG"
 };

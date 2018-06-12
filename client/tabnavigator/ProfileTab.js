@@ -130,7 +130,7 @@ renderSection() {
   render() {
       console.log(this.props.profile);
       const imageSource={
-        uri:this.props.profile.image
+        uri: this.props.profile.image
     }
     return (
       <Container style={styles.container}>

@@ -84,6 +84,23 @@ export function fetchPost(id) {
     payload: axios.get(`/posts/${id}`)
   };
 }
+
+
+// export function fetchUser() {
+//   return dispatch => {
+//     axios.get(`${Config.server}/api/users`).then( response => {
+//       dispatch({type: 'FETCHED_USER', payload: response.data});
+//     }).catch(err => {
+//       console.log(err.response);
+//       if (err.response.status == 401) {
+//         dispatch(signout());
+//       } else {
+//         alert('Network Error');
+//       }
+//     });
+//   };
+// }
+
 export function fetchMyPost() {
   return (dispatch,getState) => {
     axios.get(`${Config.server}/posts/mypost/${getState().loginUser.username}`).then( response => {
@@ -113,7 +130,10 @@ export function signup(username, password) {
       };
       return axios.post(`${Config.server}/api/users`,  
       createUser);
-    }).catch(err => {
+    }).then(
+     
+    )
+    .catch(err => {
       console.log(err.response);
     });
   }

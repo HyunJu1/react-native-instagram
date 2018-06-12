@@ -31,6 +31,28 @@ module.exports = function(app) {
     const users = await db.User.findAll({});
     res.json(users);
   }));
+  
+  //특정 유저 info갖고오기 (프로필 사진 가져올때 쓰려고 만듬)
+  router.get('/:id', asyncError(async (req, res, next) => {
+    const userInfo = await db.User.findAll({
+      where: {
+        name: req.params.id
+      },});
+  
+    res.json(userInfo);
+  }));
+  
+  
+  
+  
+  
   return router;
+
+
+
+
+
 };
+
+
 

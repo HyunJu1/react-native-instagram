@@ -18,7 +18,9 @@ router.get('/mypost/:id', catchErrors(async (req, res) => {
   const myposts = await Posts.findAll({
     where: {
       name: req.params.id
-    },});
+    },
+   
+  });
   console.log(myposts);
   res.json(myposts);
 
