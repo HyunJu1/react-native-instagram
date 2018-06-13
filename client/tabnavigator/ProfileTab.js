@@ -10,7 +10,8 @@ import {
   FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchMyProfile, fetchMyPost } from '../actions';
+import { fetchMyProfile } from '../actions';
+import { fetchMyPost } from '../actions/post';
 import { Ionicons,  MaterialCommunityIcons } from '@expo/vector-icons';
 import { Container, Content, Icon, Header, Left, Body, Right, Button,Segment } from 'native-base'
 import CardComponent from '../components/CardComponent'
@@ -41,7 +42,10 @@ class ProfileScreen extends React.Component {
       this.state = {
           activeIndex: 0
       }
+      this.props.fetchMyPost();
   }  
+
+
   _showMoreApp = () => {
     this.props.navigation.navigate('Other');
   };
@@ -55,6 +59,14 @@ class ProfileScreen extends React.Component {
       this.setState({
           activeIndex: index
       })
+  }
+  componentWillMount() {
+    this.props.fetchMyProfile();
+    this.props.fetchMyPost();
+    setInterval(() => {
+        this.props.fetchMyPost();
+
+      }, 1000);
   }
   checkActive = (index) => {
       if (this.state.activeIndex !== index) {
@@ -76,9 +88,9 @@ renderSectionOne() {
             uri:post.image
         }
         const idd=post.id
-        console.log("idd:"+idd)
+   
             return (
-                <TouchableOpacity onPress={()=>{console.log('idd2:'+idd);navigate('PostDetail',{idd})}}  >
+                <TouchableOpacity key={idd} onPress={()=>{navigate('PostDetail',{idd})}}  >
                 
                 <View key={index} style={[{ width: (width) / 3 }, { height: (width) / 3 }, { marginBottom: 2 }, index % 3 !== 0 ? { paddingLeft: 2 } : { paddingLeft: 0 }]}>
                         
@@ -116,7 +128,7 @@ renderSection() {
         return this.props.myPost.map(post => {
  
           return (
-            <View>
+            <View key={post.id}>
              <CardComponent myProfile={post.User.image} imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.User.username} content={post.content}/>
          
             </View>
@@ -126,14 +138,9 @@ renderSection() {
       }
   }
 }
-  componentDidMount() {
-    console.log("Before fetchUsers call!");
-    this.props.fetchMyProfile();
-    this.props.fetchMyPost();
-  }
+
   render() {
-      
-      console.log(this.props.profile);
+
       const imageSource={
         uri: this.props.profile.image
     }
@@ -241,7 +248,7 @@ renderSection() {
                   </Button>
               </View>
 
-  <Ionicons name="ios-refresh" style={{ paddingLeft: 180 , paddingTop:5}} size={32}  onPress={() => this.props.fetchMyPost() } />
+              <Ionicons name="ios-refresh" style={{ paddingLeft: 180 , paddingTop:5}} size={32}  onPress={() => this.props.fetchMyPost() } />
 
               {this.renderSection()}
 

@@ -75,6 +75,7 @@ const AppNavigator = createSwitchNavigator(
     Auth: AuthStack,
     Sign:SignStack,
     Home:HomeStack,
+    Homes:HomeStack,
     PostDetail:PostDetailStack
   },
   {

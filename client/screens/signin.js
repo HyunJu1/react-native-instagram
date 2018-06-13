@@ -20,9 +20,7 @@ const background = require("../assets/login1_bg.png");
 const mark = require("../assets/instagram_logo.png");
 const lockIcon = require("../assets/login1_lock.png");
 const personIcon = require("../assets/login1_person.png");
-import {
-  StackNavigator,
-} from 'react-navigation';
+import {  StackNavigator,} from 'react-navigation';
 
 
 

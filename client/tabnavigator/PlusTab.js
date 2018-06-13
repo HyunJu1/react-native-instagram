@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
-import { createPost } from '../actions';
+import { createPost } from '../actions/post';
 
 
 class PlusTab extends React.Component {

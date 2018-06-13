@@ -7,7 +7,7 @@ import {
   AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchPost } from '../actions';
+import { fetchPost,deletePost } from '../actions/post';
 import {Container,Content} from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import CardComponent from '../components/CardComponent'
@@ -26,6 +26,7 @@ class MyPostDetail extends React.Component {
     this.state = {
      id2  : this.props.navigation.state.params.idd
     }
+    this.props.fetchPost(this.state.id2);
 
   }
   componentDidMount() {
@@ -46,6 +47,7 @@ class MyPostDetail extends React.Component {
         }}  
           /><Button style={{paddingTop:10}} color="#ff3366" title="Delete" onPress={() => {
             
+            this.props.deletePost(this.props.posts[0].id);
           }}  />
           </View>
         );
@@ -84,7 +86,7 @@ class MyPostDetail extends React.Component {
 function mapStateToProps(state) {
   return { posts:state.post };
 }
-export default connect(mapStateToProps, { fetchPost })(MyPostDetail);
+export default connect(mapStateToProps, { fetchPost,deletePost })(MyPostDetail);
 
 const styles = StyleSheet.create({
   container: {

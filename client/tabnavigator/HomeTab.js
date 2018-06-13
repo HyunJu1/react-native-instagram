@@ -12,7 +12,8 @@ import {
   Platform
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchPosts ,fetchUsers} from '../actions';
+import { fetchPosts} from '../actions/post';
+
 import { Ionicons } from '@expo/vector-icons';
 import {Container,Content, RefreshControl,ListView, Thumbnail,Header,Left,Right,Body} from 'native-base';
 import CardComponent from '../components/CardComponent'
@@ -47,12 +48,11 @@ class HomeScreen extends React.Component {
   componentDidMount() {
    
     this.props.fetchPosts();
-    this.props.fetchUsers();
-    // setInterval(() => {
-    //   this.props.fetchPosts();
-    //   console.log("data Update");
-      
-    // }, 5000);
+
+    setInterval(() => {
+      this.props.fetchPosts();
+
+    }, 50000);
   }
 
   renderPosts() {
@@ -105,7 +105,7 @@ class HomeScreen extends React.Component {
 function mapStateToProps(state) {
   return { posts: state.posts };
 }
-export default connect(mapStateToProps, { fetchPosts,fetchUsers })(HomeScreen);
+export default connect(mapStateToProps, { fetchPosts })(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {

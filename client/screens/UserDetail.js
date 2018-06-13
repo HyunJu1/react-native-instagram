@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { fetchMyProfile, fetchMyPost } from '../actions';
 import { Ionicons,  MaterialCommunityIcons } from '@expo/vector-icons';
 import { Container, Content, Icon, Header, Left, Body, Right, Button,Segment } from 'native-base'
-import CardComponent from '../screens/CardComponent'
+import CardComponent from '../components/CardComponent'
 import Timestamp from 'react-timestamp';
 var { height, width } = Dimensions.get('window');
 import NavigationService from '../navigation_service';
