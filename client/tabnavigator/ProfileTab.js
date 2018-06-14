@@ -60,13 +60,13 @@ class ProfileScreen extends React.Component {
           activeIndex: index
       })
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchMyProfile();
     this.props.fetchMyPost();
     setInterval(() => {
         this.props.fetchMyPost();
 
-      }, 1000);
+      }, 2500);
   }
   checkActive = (index) => {
       if (this.state.activeIndex !== index) {
