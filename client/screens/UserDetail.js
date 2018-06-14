@@ -126,13 +126,12 @@ renderSection() {
   }
 }
   componentDidMount() {
-    console.log("Before fetchUsers call!");
+
     this.props.fetchMyProfile();
     this.props.fetchMyPost();
   }
   render() {
-      
-      console.log(this.props.profile);
+
       const imageSource={
         uri: this.props.profile.image
     }

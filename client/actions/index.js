@@ -3,9 +3,6 @@ import qs from 'qs';
 import { AsyncStorage } from 'react-native';
 import { Config } from '../config';
 import NavigationService from '../navigation_service';
-import {fetchPost, fetchPosts, fetchMyPost, fetchCreatePost} from './index';
-export const DELETE_POST = 'delete_post';
-export const UPDATE_POST = 'update_post';
 
 export function signin(username, password) {
   return async dispatch => {

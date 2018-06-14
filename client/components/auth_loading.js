@@ -11,24 +11,21 @@ import axios from 'axios';
 export default class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
-    console.log("AUTHLOADING?????");
+
     this._bootstrapAsync();
   }
 
-  // Fetch the token from storage then navigate to our appropriate place
+e
   _bootstrapAsync = async () => {
-    console.log('Try to read asyncStorage 1')
+
     const accessToken = await AsyncStorage.getItem('accessToken');
-    console.log("ACCESS TOKEN!!!! = ", accessToken);
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
+
     if (accessToken) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     }
     this.props.navigation.navigate(accessToken ? 'App' : 'Auth');
   };
 
-  // Render any loading content that you like here
   render() {
     return (
       <View style={styles.container}>

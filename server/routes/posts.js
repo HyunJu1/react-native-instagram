@@ -10,7 +10,8 @@ const catchErrors = require('../utils/async-error');
 router.get('/', catchErrors(async (req, res) => {
   const users=Posts.belongsTo(Users);
   const posts = await Posts.findAll({
-    include:[users]
+    include:[users],
+    order: [ [ 'createdAt', 'DESC' ]]
   });
 
   res.json(posts);
@@ -25,7 +26,8 @@ router.get('/mypost/:id', catchErrors(async (req, res) => {
     where: {
       UserId: req.params.id
     },
-    include:[users]
+    include:[users],
+    order: [ [ 'createdAt', 'DESC' ]]
    
   });
 

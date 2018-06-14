@@ -22,7 +22,7 @@ class MyPostDetail extends React.Component {
   };
   constructor(props){
     super(props);
-    console.log(this.props.navigation.state.params.idd);
+
     this.state = {
      id2  : this.props.navigation.state.params.idd
     }
@@ -38,7 +38,7 @@ class MyPostDetail extends React.Component {
    
     if (this.props.posts) {
       return this.props.posts.map(post => {
-        console.log('post:'+post)
+
         return (
           <View style={styles.card} key={post.id}>
             <CardComponent myProfile={post.User.image} imageSource={post.image} likes={post.likes} createdAt={post.createdAt} title={post.title} name={post.User.username} content={post.content}/>
